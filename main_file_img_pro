@@ -1,5 +1,5 @@
 import image_preprocess as pp
-import imgDG_models as cm #change the name as required 
+import img_model_with_oop as cm #change the name as required 
 from tensorflow.keras import layers, models
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
