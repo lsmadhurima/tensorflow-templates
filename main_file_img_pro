@@ -1,0 +1,25 @@
+import imgDG_preprocess as pp
+import imgDG_models as cm #change the name as required 
+from tensorflow.keras import layers, models
+from sklearn.model_selection import train_test_split
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+if __name__=='__main__':
+    image_folder_path='train'
+    data=pp.preprocess_data()
+    data.visualize_images(image_folder_path,2)
+    image_df, train, label=data.preprocess(image_folder_path)
+    image_df.to_csv("image_df.csv")
+    tr_gen, tt_gen, va_gen = data.generate_train_test_images(image_df, train, label)
+    print(len(tr_gen))
+    # image_df.to_csv("image_df.csv")
+    AnnModel = cm.DeepANN()
+    Model1 = AnnModel.simple_model()
+    print("train generator", tr_gen)
+    ANN_history = Model1.fit(tr_gen, epochs=2, validation_data=va_gen)
+    # Evaluate the model
+    Ann_test_loss, Ann_test_acc = Model1.evaluate(tr_gen)
+    print(f'Test accuracy: {Ann_test_acc}')
+    # saving the model
+    Model1.save("my_model1.keras")
+    print("the ann architecture is ")
+    print(Model1.summary())
