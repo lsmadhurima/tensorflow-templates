@@ -1,4 +1,4 @@
-import imgDG_preprocess as pp
+import image_preprocess as pp
 import imgDG_models as cm #change the name as required 
 from tensorflow.keras import layers, models
 from sklearn.model_selection import train_test_split
